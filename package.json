@@ -1,0 +1,30 @@
+{
+  "name": "rapososwords",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rbxtsc",
+    "watch": "rbxtsc -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@rbxts/compiler-types": "^3.0.0-types.0",
+    "@rbxts/types": "^1.0.844",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-roblox-ts": "^0.0.36",
+    "roblox-ts": "^3.0.0",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@rbxts/react": "^17.2.3",
+    "@rbxts/react-roblox": "^17.2.3",
+    "@rbxts/t": "^3.2.1",
+    "@rbxts/vide": "^0.5.7"
+  }
+}
