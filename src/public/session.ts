@@ -74,9 +74,8 @@ class Session {
 	CloseSession() {
 		print("Closing session", this.sessionid, "...");
 
-		Session.mapCreatedSessions.delete(this.sessionid);
-
 		Session.sigSessionClosing.Fire(this).expect();
+		Session.mapCreatedSessions.delete(this.sessionid);
 
 		for (const user of this.GetPlayers())
 			this.RemovePlayer(user, "Session closed.");
@@ -97,7 +96,8 @@ class Session {
 		this.sigPlayerJoined.Clear();
 		this.sigPlayerLeft.Clear();
 
-		table.clear(this);
+		for (const [index] of this as unknown as Map<string, unknown>)
+			rawset(this, index, undefined);
 	}
 
 	BindToClose(callback: (session: Session) => void) {
