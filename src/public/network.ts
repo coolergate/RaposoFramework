@@ -57,10 +57,7 @@ export class NetworkCapsule {
 
 		if (RunService.IsServer()) {
 			rbxcConnection = instRemoteEvent.OnServerEvent.Connect((user, id, bfr) => {
-				if (!session.GetPlayers().includes(user)) {
-					print("Player is not in this session.");
-					return;
-				}
+				if (!session.GetPlayers().includes(user)) return;
 				if (!t.string(id) || !t.buffer(bfr))
 					throw `User ${user.UserId} has sent an invalid package.\n{ id = ${id}, tid = ${typeOf(id)}}, bfr = ${typeOf(bfr)}`;
 
