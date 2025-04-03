@@ -33,6 +33,14 @@ export async function JoinSession(sessionid: string) {
 	WriteNativePackage("__JOIN-SESSION").WRITE_STRING(sessionid).MESSAGE_END();
 }
 
+export function GetCurrentSession() {
+	return currSession;
+}
+
+export function DisconnectFromCurrentSession() {
+	WriteNativePackage("__LEAVE-SESSION").MESSAGE_END();
+}
+
 /* -------------------------------------------------------------------------- */
 /*                                  Bindings                                  */
 /* -------------------------------------------------------------------------- */

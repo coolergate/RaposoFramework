@@ -44,7 +44,7 @@ Players.CharacterAutoLoads = false;
 import "game/shared/entities/Player";
 import "./players";
 
-new Session("default");
+new Session("default1");
 
 ListenNativePackage("__GET-SESSIONS", (user) => {
 	const bfr = WriteNativePackage("__GET-SESSIONS-RETURN", user);
@@ -70,6 +70,18 @@ ListenNativePackage("__JOIN-SESSION", (user, bfr) => {
 	}
 
 	target.InsertPlayer(user);
+});
+
+ListenNativePackage("__LEAVE-SESSION", (user, bfr) => {
+	if (!user) return;
+
+	print("Disconnecting", user, "from all sessions...");
+
+	for (const [sessionid, sessionobj] of Session.mapCreatedSessions) {
+		if (!sessionobj.GetPlayers().includes(user)) continue;
+
+		sessionobj.RemovePlayer(user, "Disconnected by user.");
+	}
 });
 
 Lifecycle.InitializeLifecycle();
