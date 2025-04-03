@@ -78,13 +78,10 @@ export class EntityManager {
 			task.wait();
 
 			for (const [key, value] of entity as unknown as Map<string, unknown>) {
-				if (typeIs(value, "table")) table.clear(value);
-
 				rawset(entity, key, undefined);
 			}
 
 			setmetatable(entity, undefined);
-			table.clear(entity);
 		});
 	}
 
