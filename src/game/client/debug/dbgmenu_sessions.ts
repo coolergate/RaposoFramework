@@ -13,7 +13,6 @@ const rgAvailableSessions: string[] = [];
 /*                                  Variables                                 */
 /* -------------------------------------------------------------------------- */
 let bRefreshing = false;
-let sCurrentSessionName = "";
 
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
@@ -41,7 +40,6 @@ function Window() {
 	{
 		Iris.SameLine([]);
 		const btnRefresh = Iris.Button(["Refresh"]);
-		const btnConnect = Iris.Button(["Connect"]);
 		Iris.End();
 
 		if (bRefreshing) {
@@ -53,8 +51,11 @@ function Window() {
 				
 				Iris.SameLine([]);
 				{
-					if (Iris.Button(["Select"]).clicked()) sCurrentSessionName = element;
-					Iris.Text([`[${sCurrentSessionName === element ? "X" : " "}] ${element}`]);
+					if (Iris.Button(["Join"]).clicked()) {
+						JoinSession(element).catch(() => ReloadSessionsList());
+						isbVisible.set(false);
+					}
+					Iris.Text([element]);
 				}
 				Iris.End();
 	
@@ -65,11 +66,6 @@ function Window() {
 
 		if (rgAvailableSessions.size() <= 0 && !bRefreshing) {
 			Iris.Text(["Click refresh to update the session list!"]);
-		}
-
-		if (btnConnect.clicked()) {
-			JoinSession(sCurrentSessionName).catch(ReloadSessionsList());
-			isbVisible.set(false);
 		}
 
 		if (btnRefresh.clicked()) ReloadSessionsList();
